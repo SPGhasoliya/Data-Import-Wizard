@@ -53,51 +53,6 @@ public with sharing class DataImportController {
             return fieldsList;
         }
 
-    // @AuraEnabled
-    // public static void insertRecords(List<Map<String, Object>> records, String objectName) {
-
-    //     // Validate object name
-    //     if (String.isBlank(objectName) || !Schema.getGlobalDescribe().containsKey(objectName)) {
-    //         throw new AuraHandledException('Invalid object name');
-    //     }
-
-    //     Schema.SObjectType sObjType = Schema.getGlobalDescribe().get(objectName);
-    //     Schema.DescribeSObjectResult objDescribe = sObjType.getDescribe();
-    //     Map<String, Schema.SObjectField> fieldMap = objDescribe.fields.getMap();
-
-    //     List<SObject> sObjectList = new List<SObject>();
-
-    //     for (Map<String, Object> record : records) {
-    //         SObject sObjectRecord = sObjType.newSObject();
-
-    //         for (String field : record.keySet()) {
-
-    //             // Validate field
-    //             if (!fieldMap.containsKey(field)) {
-    //                 continue;
-    //             }
-
-    //             Schema.DescribeFieldResult dfr = fieldMap.get(field).getDescribe();
-
-    //             // Enforce FLS
-    //             if (dfr.isCreateable()) {
-    //                 sObjectRecord.put(field, record.get(field));
-    //             }
-    //         }
-    //         sObjectList.add(sObjectRecord);
-    //     }
-
-    //     // Insert records with partial success
-    //     Database.SaveResult[] results = Database.insert(sObjectList, false);
-
-    //     // Handle errors
-    //     for (Database.SaveResult sr : results) {
-    //         if (!sr.isSuccess()) {
-    //             throw new AuraHandledException(sr.getErrors()[0].getMessage());
-    //         }
-    //     }
-    // }
-
     @AuraEnabled
     public static void insertRecords(List<Map<String, Object>> records, String objectName){
 
