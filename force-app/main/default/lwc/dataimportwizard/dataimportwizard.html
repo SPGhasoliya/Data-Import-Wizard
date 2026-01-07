@@ -1,0 +1,48 @@
+<template>
+        <lightning-card class="slds-p-around_small" variant="Narrow"  title="Data Import Wizard" icon-name="standard:account">
+            <div class="slds-p-vertical_small">
+            <lightning-file-upload
+                label="Upload CSV File"
+                name="fileUploader"
+                accept={acceptedFormats}
+                onuploadfinished={handleUploadFinished}
+            >
+            </lightning-file-upload>
+            </div>
+
+            <!-- Select Object -->
+            <div class="slds-p-vertical_small">
+            <lightning-combobox
+            name="objectSelection"
+            label="Select Salesforce Object"
+            placeholder="Select an Object"
+            options={salesforceObjects}
+            onchange={handleObjectSelection}></lightning-combobox>
+            </div>
+
+            <!-- Mapping the field with file coloumn --> 
+
+            <div class="slds-p-vertical_small">
+                <h2 class="slds-text-heading_small">Field Mapping</h2>
+                <template for:each={fieldList} for:item="field">
+                <div key={field.apiName}>
+                    <div>{field.label}</div>
+                    <div>
+                        <lightning-combobox
+                            name="columnselection"
+                            placeholder="Select an Option"
+                            options={columnHeader}
+                            onchange={handleColumnSelection}
+                            data-apiname={field.apiName}
+                            >
+                        </lightning-combobox>
+                    </div>
+                </div>
+                </template>
+            </div>
+
+            <!-- import dataButton-->
+            <hr/>
+            <lightning-button variant="brand-outline" label="Import Data" title="Import Data" onclick={importData} class="slds-m-left_x-small"></lightning-button>
+        </lightning-card>
+</template>
